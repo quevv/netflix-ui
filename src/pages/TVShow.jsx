@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import { fetchMovies, getGenres } from '../stores';
 import styled from 'styled-components';
 import Navbar from '../components/Navbar';
@@ -9,7 +8,6 @@ import NotAvailable from '../components/NotAvailable';
 import SelectGenres from '../components/SelectGenres';
 
 const TVShow = () => {
-    const navigate = useNavigate();
     const genres = useSelector((state) => state.netflix.genres)
     const [isScrolled, setIsScrolled] = useState(false);
     const movies = useSelector((state) => state.netflix.movies)

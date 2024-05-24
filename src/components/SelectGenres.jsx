@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { fetchDataByGenre, getGenres } from '../stores';
+import { fetchDataByGenre } from '../stores';
 import { useDispatch } from 'react-redux';
 
 const SelectGenres = ({ genres, type }) => {

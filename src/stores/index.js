@@ -46,7 +46,6 @@ const getRawData = async (api, genres, paging = false) => {
         } = await axios.get(`${api}${paging ? `&page=${i}` : ""}`);
         createArrayFromRawData(results, moviesArray, genres);
     }
-    console.log(moviesArray);
     return moviesArray;
 };
 
@@ -81,9 +80,9 @@ export const getUsersLikedMovies = createAsyncThunk(
     "netflix/getLiked",
     async (email) => {
         const {
-            data: { movies },
+            data,
         } = await axios.get(`http://localhost:5000/api/user/liked/${email}`);
-        return movies;
+        return data;
     }
 );
 

@@ -10,8 +10,11 @@ import { BiChevronDown } from 'react-icons/bi';
 import { onAuthStateChanged } from 'firebase/auth';
 import { firebaseAuth } from '../utils/firebase-config';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { removeMovieFromLiked } from '../stores';
 
 const Card = ({ movieData, isliked = false }) => {
+    const dispatch = useDispatch();
     const navigate = useNavigate()
     const [email, setEmail] = useState(undefined)
     const [isHovered, setIsHovered] = useState(false);
@@ -23,7 +26,7 @@ const Card = ({ movieData, isliked = false }) => {
 
     const addToList = async () => {
         try {
-            await axios.post("http://localhost:5000/api/user/add", { email, data: movieData.id })
+            await axios.post("http://localhost:5000/api/user/add", { email, data: movieData })
         } catch (err) {
             console.error(err);
         }
@@ -64,7 +67,14 @@ const Card = ({ movieData, isliked = false }) => {
                                     <RiThumbDownFill title='Dislike' />
                                     {
                                         isliked ? (
-                                            <BsCheck title='Remove From List' />
+                                            <BsCheck
+                                                onClick={() => {
+                                                    dispatch(
+                                                        removeMovieFromLiked({ movieId: movieData.id, email })
+                                                    )
+                                                }}
+                                                title='Remove From List'
+                                            />
                                         ) : (
                                             <AiOutlinePlus
                                                 onClick={addToList}

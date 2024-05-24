@@ -13,7 +13,6 @@ import Slider from '../components/Slider';
 
 export default function Netflix() {
     const navigate = useNavigate();
-    const genres = useSelector((state) => state.netflix.genres)
     const [isScrolled, setIsScrolled] = useState(false);
     const movies = useSelector((state) => state.netflix.movies)
     const dispatch = useDispatch();
@@ -25,13 +24,6 @@ export default function Netflix() {
     useEffect(() => {
         dispatch(fetchMovies({ type: 'movie' }));
     }, [])
-
-    // **** pageYOffset is deprecated **** 
-
-    // window.onscroll = () => {
-    //     setIsScrolled(window.pageYOffset === 0 ? false : true)
-    //     return () => (window.onscroll = null);
-    // };
 
     // Check scroll down for navbar styling
     useEffect(() => {
